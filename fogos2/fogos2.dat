@@ -1,0 +1,17 @@
+/*********************************************
+ * OPL 12.8.0.0 Data
+ * Author: Luís Alves
+ * Creation Date: 1 Dec 2018 at 15:28:01
+ *********************************************/
+SheetConnection sheet("fogos2.xlsx"); 
+
+n from SheetRead(sheet,"Sheet1!n");
+d from SheetRead(sheet,"Sheet1!delta");
+b from SheetRead(sheet,"Sheet1!b");
+cn from SheetRead(sheet,"Sheet1!cn");
+cs from SheetRead(sheet,"Sheet1!cs");
+ce from SheetRead(sheet,"Sheet1!ce");
+co from SheetRead(sheet,"Sheet1!co");
+
+x to SheetWrite(sheet,"Sheet1!x");
+t to SheetWrite(sheet,"Sheet1!t");
