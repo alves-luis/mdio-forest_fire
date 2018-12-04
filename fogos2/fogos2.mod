@@ -15,17 +15,23 @@ int origemY = 1;
 int protegerX = 7;
 int protegerY = 7;
 
-dvar boolean x[1..n][1..n];
-dvar int t[1..n][1..n];
+dvar boolean resAt[1..n][1..n];
+dvar int minTime[1..n][1..n];
 
-maximize t[protegerX][protegerY];
+maximize sum (i in 1..n, j in 1..n) minTime[i][j];
 
-subject to{
-	t[origemX][origemY] == 0;
-	sum (i in 1..n, j in 1..n) x[i][j] <= b;
-	forall (i in 2..n, j in 1..n) t[i][j] <= ce[i-1][j] + x[i-1][j]*d + t[i-1][j];
-	forall (i in 1..n-1, j in 1..n) t[i][j] <= co[i+1][j] + x[i+1][j]*d + t[i+1][j];
-	forall (i in 1..n, j in 1..n-1) t[i][j] <= cn[i][j+1] + x[i][j+1]*d + t[i][j+1];
-	forall (i in 1..n, j in 2..n) t[i][j] <= cs[i][j-1] + x[i][j-1]*d + t[i][j-1];
-	forall (i in 1..n, j in 1..n) t[i][j] >= 0;
+subject to {
+
+	// minimum time at origin is 0
+	minTime[origemX][origemY] == 0;
+	// protected cell
+	minTime[protegerX][protegerY] >= g;
+	// sum of resources less or equal to available resources
+	sum (i in 1..n, j in 1..n) resAt[i][j] <= b;
+	// time to i(j-1) - time to ij <= cs[i][j]
+	forall (i in 1..n, j in 1..n-1) minTime[i][j] - minTime[i][j+1] <= cs[i][j] + resAt[i][j]*d;
+	forall (i in 1..n, j in 2..n) minTime[i][j] - minTime[i][j-1] <= cn[i][j] + resAt[i][j]*d;
+	forall (i in 2..n, j in 1..n) minTime[i][j] - minTime[i-1][j] <= co[i][j] + resAt[i][j]*d;
+	forall (i in 1..n-1, j in 1..n) minTime[i][j] - minTime[i+1][j] <= ce[i][j] + resAt[i][j]*d;
+	forall (i in 1..n, j in 1..n) minTime[i][j] >= 0;
 }
