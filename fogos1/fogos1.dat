@@ -3,7 +3,7 @@
  * Author: Luís Alves
  * Creation Date: 4 Dec 2018 at 19:23:01
  *********************************************/
-SheetConnection sheet("fogos2.xlsx"); 
+SheetConnection sheet("fogos1.xlsx"); 
 
 n from SheetRead(sheet,"Sheet1!n");
 cn from SheetRead(sheet,"Sheet1!cn");
@@ -11,5 +11,8 @@ cs from SheetRead(sheet,"Sheet1!cs");
 ce from SheetRead(sheet,"Sheet1!ce");
 co from SheetRead(sheet,"Sheet1!co");
 
-x to SheetWrite(sheet,"Sheet1!x");
-t to SheetWrite(sheet,"Sheet1!t");
+
+numPathsN to SheetWrite(sheet,"Sheet1!nn");
+numPathsS to SheetWrite(sheet,"Sheet1!ns");
+numPathsE to SheetWrite(sheet,"Sheet1!ne");
+numPathsO to SheetWrite(sheet,"Sheet1!no");
