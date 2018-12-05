@@ -10,6 +10,7 @@ int ce[1..n][1..n] = ...;
 int co[1..n][1..n] = ...;
 int d = ...;
 int b = ...;
+int g = ...;
 int origemX = 1;
 int origemY = 1;
 int protegerX = 7;
