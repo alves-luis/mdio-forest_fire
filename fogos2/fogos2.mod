@@ -13,26 +13,26 @@ int b = ...;
 int g = ...;
 int origemX = 1;
 int origemY = 1;
-int protegerX = 7;
-int protegerY = 7;
+int protegerX = 3;
+int protegerY = 3;
 
 dvar boolean resAt[1..n][1..n];
 dvar int minTime[1..n][1..n];
 
-maximize sum (i in 1..n, j in 1..n) minTime[i][j];
+maximize sum (x in 1..n, y in 1..n) minTime[y][x];
 
 subject to {
 
 	// minimum time at origin is 0
-	minTime[origemX][origemY] == 0;
+	minTime[origemY][origemX] == 0;
 	// protected cell
-	minTime[protegerX][protegerY] >= g;
+	//minTime[protegerY][protegerX] >= g;
 	// sum of resources less or equal to available resources
-	sum (i in 1..n, j in 1..n) resAt[i][j] <= b;
+	sum (x in 1..n, y in 1..n) resAt[y][x] <= b;
 	// time to i(j-1) - time to ij <= cs[i][j]
-	forall (i in 1..n, j in 1..n-1) minTime[i][j] - minTime[i][j+1] <= cs[i][j] + resAt[i][j]*d;
-	forall (i in 1..n, j in 2..n) minTime[i][j] - minTime[i][j-1] <= cn[i][j] + resAt[i][j]*d;
-	forall (i in 2..n, j in 1..n) minTime[i][j] - minTime[i-1][j] <= co[i][j] + resAt[i][j]*d;
-	forall (i in 1..n-1, j in 1..n) minTime[i][j] - minTime[i+1][j] <= ce[i][j] + resAt[i][j]*d;
-	forall (i in 1..n, j in 1..n) minTime[i][j] >= 0;
+	forall (x in 1..n, y in 1..n-1) - minTime[y][x] + minTime[y+1][x] <= cs[y][x] + resAt[y][x]*d;
+	forall (x in 1..n, y in 2..n) - minTime[y][x] + minTime[y-1][x] <= cn[y][x] + resAt[y][x]*d;
+	forall (x in 2..n, y in 1..n) - minTime[y][x] + minTime[y][x-1] <= co[y][x] + resAt[y][x]*d;
+	forall (x in 1..n-1, y in 1..n) - minTime[y][x] + minTime[y][x+1] <= ce[y][x] + resAt[y][x]*d;
+	forall (x in 1..n, y in 1..n) minTime[y][x] >= 0;
 }
