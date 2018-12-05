@@ -3,7 +3,7 @@
  * Author: Luís Alves
  * Creation Date: 1 Dec 2018 at 15:28:01
  *********************************************/
-SheetConnection sheet("minifogos2.xlsx"); 
+SheetConnection sheet("fogos2.xlsx"); 
 
 n from SheetRead(sheet,"Sheet1!n");
 d from SheetRead(sheet,"Sheet1!delta");

@@ -26,7 +26,7 @@ subject to {
 	// minimum time at origin is 0
 	minTime[origemY][origemX] == 0;
 	// protected cell
-	//minTime[protegerY][protegerX] >= g;
+	minTime[protegerY][protegerX] >= g;
 	// sum of resources less or equal to available resources
 	sum (x in 1..n, y in 1..n) resAt[y][x] <= b;
 	// time to i(j-1) - time to ij <= cs[i][j]
