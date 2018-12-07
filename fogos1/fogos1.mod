@@ -3,19 +3,18 @@
  * Author: Luís Alves
  * Creation Date: 4 Dec 2018 at 19:23:01
  *********************************************/
- // MOOOO ALTERA OS COMENTÁRIOSSSSSS
 int n = ...; // grid of nxn
-int cn[1..n][1..n] = ...; // arcs from ij to i(j-1)
-int cs[1..n][1..n] = ...; // arcs from ij to i(j+1)
-int ce[1..n][1..n] = ...; // arcs from ij to (i+1)j
-int co[1..n][1..n] = ...; // arcs from ij to (i-1)j
+int cn[1..n][1..n] = ...; // arcs from yx to y-1x
+int cs[1..n][1..n] = ...; // arcs from yx to y+1x
+int ce[1..n][1..n] = ...; // arcs from yx to yx+1
+int co[1..n][1..n] = ...; // arcs from yx to yx-1
 int origemX = 1;
 int origemY = 1;
 
-dvar int numPathsN[1..n][1..n]; // num of paths from ij to i(j-1)
-dvar int numPathsS[1..n][1..n]; // num of paths from ij to i(j+1)
-dvar int numPathsE[1..n][1..n]; // num of paths from ij to (i+1)j
-dvar int numPathsO[1..n][1..n]; // num of paths from ij to (i-1)j
+dvar int numPathsN[1..n][1..n]; // num of paths from yx to y-1x
+dvar int numPathsS[1..n][1..n]; // num of paths from yx to y+1x
+dvar int numPathsE[1..n][1..n]; // num of paths from yx to yx+1
+dvar int numPathsO[1..n][1..n]; // num of paths from yx to yx-1
 
 minimize sum (y in 1..n, x in 1..n) (numPathsN[y][x]*cn[y][x] + numPathsS[y][x]*cs[y][x] + numPathsE[y][x]*ce[y][x] + numPathsO[y][x]*co[y][x]);
 

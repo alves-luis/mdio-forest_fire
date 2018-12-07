@@ -13,26 +13,29 @@ int b = ...;
 int g = ...;
 int origemX = 1;
 int origemY = 1;
-int protegerX = 3;
-int protegerY = 3;
+int protegerX = 7;
+int protegerY = 7;
 
+// se há recurso em yx
 dvar boolean resAt[1..n][1..n];
+// instante de tempo em yx
 dvar int minTime[1..n][1..n];
 
-maximize sum (x in 1..n, y in 1..n) minTime[y][x];
+maximize minTime[protegerY][protegerX];
 
 subject to {
 
-	// minimum time at origin is 0
+	// origem tem instante 0
 	minTime[origemY][origemX] == 0;
-	// protected cell
+	// célula protegida requer >= g
 	minTime[protegerY][protegerX] >= g;
-	// sum of resources less or equal to available resources
+	// a soma dos recursos tem de ser menor ou igual a b
 	sum (x in 1..n, y in 1..n) resAt[y][x] <= b;
-	// time to i(j-1) - time to ij <= cs[i][j]
-	forall (x in 1..n, y in 1..n-1) - minTime[y][x] + minTime[y+1][x] <= cs[y][x] + resAt[y][x]*d;
-	forall (x in 1..n, y in 2..n) - minTime[y][x] + minTime[y-1][x] <= cn[y][x] + resAt[y][x]*d;
-	forall (x in 2..n, y in 1..n) - minTime[y][x] + minTime[y][x-1] <= co[y][x] + resAt[y][x]*d;
-	forall (x in 1..n-1, y in 1..n) - minTime[y][x] + minTime[y][x+1] <= ce[y][x] + resAt[y][x]*d;
+	// para cada célula, o instante de tempo a que chega é igual ao custo menor até essa célula, das 4 direções
+	forall (x in 1..n, y in 1..n-1) minTime[y+1][x] - minTime[y][x]  <= cs[y][x] + resAt[y][x]*d;
+	forall (x in 1..n, y in 2..n)  minTime[y-1][x] - minTime[y][x] <= cn[y][x] + resAt[y][x]*d;
+	forall (x in 2..n, y in 1..n)  minTime[y][x-1] - minTime[y][x] <= co[y][x] + resAt[y][x]*d;
+	forall (x in 1..n-1, y in 1..n) minTime[y][x+1] - minTime[y][x] <= ce[y][x] + resAt[y][x]*d;
+	// não negatividade
 	forall (x in 1..n, y in 1..n) minTime[y][x] >= 0;
 }

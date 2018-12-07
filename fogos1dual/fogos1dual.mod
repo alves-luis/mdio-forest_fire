@@ -19,7 +19,6 @@ subject to {
 
 	// minimum time at origin is 0
 	minTime[origemY][origemX] == 0;
-	// time to i(j-1) - time to ij <= cs[i][j]
 	forall (x in 1..n, y in 1..n-1) - minTime[y][x] + minTime[y+1][x] <= cs[y][x];
 	forall (x in 1..n, y in 2..n) - minTime[y][x] + minTime[y-1][x] <= cn[y][x];
 	forall (x in 2..n, y in 1..n) - minTime[y][x] + minTime[y][x-1] <= co[y][x];
