@@ -9,7 +9,7 @@ int cs[1..n][1..n] = ...;
 int ce[1..n][1..n] = ...;
 int co[1..n][1..n] = ...;
 int delta = ...; // retardamento
-int d = 30; // duração
+int d = ...; // duração
 int b = ...;
 float prob[1..n][1..n] = ...;
 

@@ -7,7 +7,7 @@ SheetConnection sheet("fogos3.xlsx");
 
 n from SheetRead(sheet,"Sheet1!n");
 delta from SheetRead(sheet,"Sheet1!delta");
-//d from SheetRead(sheet,"Sheet1!d");
+d from SheetRead(sheet,"Sheet1!d");
 b from SheetRead(sheet,"Sheet1!b");
 cn from SheetRead(sheet,"Sheet1!cn");
 cs from SheetRead(sheet,"Sheet1!cs");
